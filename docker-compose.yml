@@ -1,7 +1,17 @@
 version: '3.7'
 services:
-  web:
+  logger:
     image: logger:latest
     container_name: logger
     volumes:
       - ./logger_output:/logger_output
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: oCSM7dqa2nrR
+    ports:
+      - 5432:5432
+    volumes:
+      - ./database_scripts:/docker-entrypoint-initdb.d/
+
