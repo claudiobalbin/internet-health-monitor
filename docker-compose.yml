@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  web:
+    image: logger:latest
+    container_name: logger
+    volumes:
+      - ./logger_output:/logger_output
