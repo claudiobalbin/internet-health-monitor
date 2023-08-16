@@ -20,9 +20,10 @@ Simple docker stack for raspberrypi logging internet speed with dashboards.
     - Python (Flask / Django) or dotnet;
 
 # Logger
-- speedtest output as json;
+    - speedtest output as json;
 
 # Database
+This project uses Postgres as the default database, but any relations compatible database would work.
 
 # Data Cleaning
-- get download and upload attributes, both divided by 1kk;
+    - get download and upload attributes, both divided by 1kk;
