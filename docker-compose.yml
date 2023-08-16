@@ -1,12 +1,14 @@
 version: '3.7'
 services:
   logger:
-    image: logger:latest
+    build: .
+    image: logger:1.0
     container_name: logger
     volumes:
       - ./logger_output:/logger_output
   db:
     image: postgres
+    container_name: db
     restart: always
     environment:
       POSTGRES_PASSWORD: oCSM7dqa2nrR
