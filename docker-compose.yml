@@ -14,6 +14,24 @@ services:
       POSTGRES_PASSWORD: oCSM7dqa2nrR
     ports:
       - 5432:5432
+    networks:
+      - speedtest
+  data_cleaner:
+    build: 
+      context: .
+      dockerfile: DataCleaner.dockerfile
+    image: data_cleaner:latest
+    container_name: data_cleaner
+    # environment:
+    #   DB_HOST: db
+    #   LOGGER_OUTPUT: /home/logger_output
     volumes:
-      - ./database_scripts:/docker-entrypoint-initdb.d/
+      - ./logger_output:/home/logger_output
+    depends_on:
+      - db
+    networks:
+      - speedtest
 
+networks:
+  speedtest:
+    driver: bridge
