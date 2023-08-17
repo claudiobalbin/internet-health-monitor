@@ -1,19 +1,26 @@
 version: '3.7'
 services:
-  logger:
-    build: .
-    image: logger:1.0
-    container_name: logger
+  # logger:
+  #   build: .
+  #   image: logger:1.0
+  #   container_name: logger
+  #   volumes:
+  #     - ./logger_output:/logger_output
+  # db:
+  #   image: postgres
+  #   container_name: db
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: oCSM7dqa2nrR
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ./database_scripts:/docker-entrypoint-initdb.d/
+  data_cleaner:
+    build: 
+      context: .
+      dockerfile: DataCleaner.dockerfile
+    image: data_cleaner:1.0
+    container_name: data_cleaner
     volumes:
       - ./logger_output:/logger_output
-  db:
-    image: postgres
-    container_name: db
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: oCSM7dqa2nrR
-    ports:
-      - 5432:5432
-    volumes:
-      - ./database_scripts:/docker-entrypoint-initdb.d/
-
