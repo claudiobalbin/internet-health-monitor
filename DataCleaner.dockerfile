@@ -14,7 +14,7 @@ RUN pip3 install peewee psycopg2 psycopg2-binary
 RUN chmod +x /home/data_cleaner.py
 
 # Add the cron job to the crontab file
-RUN echo "* * * * * /usr/local/bin/python3 /home/data_cleaner.py >> /proc/1/fd/1 2>&1" >> /etc/cron.d/data_cleaner
+RUN echo "*/5 * * * * /usr/local/bin/python3 /home/data_cleaner.py >> /proc/1/fd/1 2>&1" >> /etc/cron.d/data_cleaner
 
 # Give execution rights to the cron job
 RUN chmod 0644 /etc/cron.d/data_cleaner
