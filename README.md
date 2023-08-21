@@ -57,3 +57,5 @@ Configure data source:
 ![Data source](grafana_datasource_config.png)
 
 Customize at will!
+
+![Dashboard example](grafana_dashboard_example.png)
