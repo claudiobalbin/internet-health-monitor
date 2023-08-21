@@ -1,29 +1,59 @@
-# internet-speedtest-rpi
-Simple docker stack for raspberrypi logging internet speed with dashboards.
+# internet-health-monitor
+Docker stack for monitoring internet quality with dashboards.
 
-# Stack
-
-1. Logger
-    - Internet speed testing using cli;
-    - Simple NixOS based on Debian that will trigger the speedtest-cli tool to log the output as json for further use.
-    - Should be able to store test results in a shared volume or database;
-2. Database
-    - Efficient store of logged data;
-    - Could be a simple database like SQLite or a more complex one;
-3. Data Cleaning
-    - Monitors the output folder for new logs;
-    - Reads the logs and parse the data cleaning it;
-    - Stores the clean data into the database;
-    - FastAPI?
-4. UI
-    - Simple UI to query and output logged data in a simple dashboard;
-    - Python (Flask / Django) or dotnet;
+Works with x86-64 and ARM64 architectures;
 
 # Logger
-    - speedtest output as json;
+- Internet speed testing using cli;
+- Alpine container that will trigger the speedtest-cli tool and log test results;
+- Scheduled on CRON to run every 5 mins;
+- Output will be logged as json in logger_output folder;
 
 # Database
-This project uses Postgres as the default database, but any relations compatible database would work.
+This project uses Postgres as the default database, but any compatible relational database would work.
+
+- Postgres container based in Debian 12;
+- Using PostgreSQL 15;
+- Persist logged data;
 
 # Data Cleaning
-    - get download and upload attributes, both divided by 1kk;
+Automated data handling/cleaning using python.
+
+- Python 3.11 default container image;
+- Scheduled on CRON to run every 5 mins;
+- Get download, upload and ping(latency) attributes;
+- Monitors the output folder for new logs;
+- Reads the logs and parse the data cleaning it;
+- Stores the clean data into the database;
+- Removes the logged file;
+
+# UI - Dashboard
+Using [Grafana](https://grafana.com/) to enable custom dashboards.
+
+- Simple UI to query and show logged data in a simple dashboard;
+- Using Grafa na default container;
+
+# ToDos
+- Persist default grafana dashboard;
+- Use EnvVars to set database on Data Cleaning container;
+
+# Requirements
+
+- Docker 22+
+- Docker Compose 1.29.2+
+
+# Usage example
+
+On the project's root directory:
+
+    docker-compose up -d
+
+Access the Dashboard
+
+    localhost:3000/
+
+Configure data source:
+
+![Data source](grafana_datasource_config.png)
+
+Customize at will!
