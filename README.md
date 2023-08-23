@@ -35,7 +35,6 @@ Using [Grafana](https://grafana.com/) to enable custom dashboards.
 
 # ToDos
 - Persist default grafana dashboard;
-- Use EnvVars to set database on Data Cleaning container;
 
 # Requirements
 
@@ -45,6 +44,12 @@ Using [Grafana](https://grafana.com/) to enable custom dashboards.
 # Usage example
 
 On the project's root directory:
+
+Create the `.env` file:
+
+    echo DB_PASSWORD=\"YOUR_PASS_HERE\" >> .env
+
+Spin up the containers:
 
     docker-compose up -d
 
