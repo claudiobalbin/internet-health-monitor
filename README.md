@@ -59,3 +59,7 @@ Configure data source:
 Customize at will!
 
 ![Dashboard example](grafana_dashboard_example.png)
+
+Data example:
+
+![Data example](grafana_datasource_example.png)
