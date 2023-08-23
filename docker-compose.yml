@@ -2,7 +2,7 @@ version: '3.7'
 services:
   logger:
     build: .
-    image: logger:1.0
+    image: logger:latest
     container_name: logger
     volumes:
       - ./logger_output:/logger_output
@@ -11,20 +11,21 @@ services:
     container_name: db
     restart: always
     environment:
-      POSTGRES_PASSWORD: oCSM7dqa2nrR
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - 5432:5432
     networks:
       - speedtest
   data_cleaner:
-    build: 
+    build:
       context: .
       dockerfile: DataCleaner.dockerfile
     image: data_cleaner:latest
     container_name: data_cleaner
-    # environment:
-    #   DB_HOST: db
-    #   LOGGER_OUTPUT: /home/logger_output
+    environment:
+      - DB_HOST=db
+      - DB_PASS=${DB_PASSWORD}
+      - LOGGER_OUTPUT=/home/logger_output
     volumes:
       - ./logger_output:/home/logger_output
     depends_on:
